@@ -3,8 +3,9 @@ package kafka
 
 import (
 	"context"
-	"digit-core/pkg/tracer/logger"
-	"digit-core/pkg/tracer/validation"
+
+	"github.com/varunreddy-egov/tracer/pkg/logger"
+	"github.com/varunreddy-egov/tracer/pkg/validation"
 
 	"github.com/segmentio/kafka-go"
 )

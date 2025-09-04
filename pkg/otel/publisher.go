@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"digit-core/pkg/tracer/config"
-	"digit-core/pkg/tracer/pubsub"
+	"github.com/varunreddy-egov/tracer/pkg/config"
+	"github.com/varunreddy-egov/tracer/pkg/pubsub"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/codes"
 	"go.opentelemetry.io/otel/trace"
@@ -97,7 +97,7 @@ func (tp *TracedPublisher) Subscribe(ctx context.Context, topic string, callback
 		tracedCallback := func(message interface{}) {
 			// Create a new context for each message
 			msgCtx := context.Background()
-			
+
 			// Extract trace context if present in message
 			if msgMap, ok := message.(map[string]interface{}); ok {
 				if traceData, exists := msgMap["_trace"]; exists {

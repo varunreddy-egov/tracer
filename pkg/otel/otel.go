@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"digit-core/pkg/tracer/config"
+	"github.com/varunreddy-egov/tracer/pkg/config"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 )
 
@@ -21,7 +21,7 @@ func NewManager(cfg *Config) *Manager {
 	if cfg == nil {
 		cfg = DefaultConfig()
 	}
-	
+
 	return &Manager{
 		config: cfg,
 	}

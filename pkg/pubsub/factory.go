@@ -1,8 +1,9 @@
 package pubsub
 
 import (
-	"digit-core/pkg/tracer/config"
 	"fmt"
+
+	"github.com/varunreddy-egov/tracer/pkg/config"
 )
 
 type PubSubClient interface {

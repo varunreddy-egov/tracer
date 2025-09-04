@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"digit-core/pkg/tracer/db"
+	"github.com/varunreddy-egov/tracer/pkg/db"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/codes"
 	"go.opentelemetry.io/otel/trace"
@@ -140,12 +140,12 @@ func (dt *OtelDBTracer) TraceTx(ctx context.Context, operation string, duration 
 func CreateTracedDB(sqlDB interface{}, dbType string) *db.TracedDB {
 	tracer := GetGlobalTracer()
 	dbTracer := NewOtelDBTracer(tracer)
-	
+
 	// Type assertion to get *sql.DB
 	if sqlDatabase, ok := sqlDB.(*sql.DB); ok {
 		return db.NewTracedDB(sqlDatabase, dbTracer)
 	}
-	
+
 	// If not *sql.DB, return nil (could be enhanced to support other DB types)
 	return nil
 }
@@ -156,14 +156,14 @@ func (t *Tracer) WithDBSpan(ctx context.Context, operation string, tableName str
 	if tableName != "" {
 		spanName = fmt.Sprintf("db.%s.%s", operation, tableName)
 	}
-	
+
 	return t.WithSpanSimple(ctx, spanName, func(ctx context.Context) error {
 		// Add database-specific attributes
 		t.AddAttribute(ctx, "db.operation.type", operation)
 		if tableName != "" {
 			t.AddAttribute(ctx, "db.table", tableName)
 		}
-		
+
 		return fn(ctx)
 	})
 }

@@ -2,8 +2,9 @@
 package pubsub
 
 import (
-	"digit-core/pkg/tracer/config"
 	"log"
+
+	"github.com/varunreddy-egov/tracer/pkg/config"
 )
 
 func init() {
